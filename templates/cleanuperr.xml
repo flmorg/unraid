@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<Container version="1.3.0">
+  <Name>cleanuperr</Name>
+  <Repository>ghcr.io/flmorg/cleanuperr:latest</Repository>
+  <Registry>https://github.com/flmorg/cleanuperr/pkgs/container/cleanuperr</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/flmorg/cleanuperr/issues</Support>
+  <Project>https://github.com/flmorg/cleanuperr</Project>
+  <Overview>## cleanuperr&#xD;
+&#xD;
+cleanuperr is a tool for automating the cleanup of unwanted or blocked files in Sonarr, Radarr, and supported download clients like qBittorrent. It removes incomplete or blocked downloads, updates queues, and enforces blacklists or whitelists to manage file selection. After removing blocked content, cleanuperr can also trigger a search to replace the deleted shows/movies.&#xD;
+For a detailed guide on how to use it, check out the project's GitHub page.
+</Overview>
+  <Category>Tools:Utilities MediaApp:Video</Category>
+  <WebUI/>
+  <TemplateURL>https://raw.githubusercontent.com/flmorg/unraid/master/templates/cleanuperr.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/flmorg/unraid/refs/heads/main/templates/img/cleanuperr.png</Icon>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DonateText>If I made your life just a tiny bit easier, consider buying me a coffee!</DonateText>
+  <DonateLink>https://buymeacoffee.com/flaminel</DonateLink>
+  <Requires/>
+  <Data>
+    <Volume>
+      <HostDir>/var/logs/cleanuperr</HostDir>
+      <ContainerDir>/var/logs</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Config Name="LOGGING__LOGLEVEL" Target="LOGGING__LOGLEVEL" Default="Verbose|Debug|Information|Warning|Error|Fatal" Mode="" Description="Can be Verbose, Debug, Information, Warning, Error, or Fatal" Type="Variable" Display="always" Required="false" Mask="false">Information</Config>
+  <Config Name="LOGGING__FILE__ENABLED" Target="LOGGING__FILE__ENABLED" Default="false|true" Mode="" Description="Enable or disable logging to file" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
+  <Config Name="LOGGING__FILE__PATH" Target="LOGGING__FILE__PATH" Default="/var/logs" Mode="" Description="Directory where to save the log files" Type="Variable" Display="always" Required="false" Mask="false">/var/logs</Config>
+  <Config Name="LOGGING__ENHANCED" Target="LOGGING__ENHANCED" Default="false|true" Mode="" Description="Enhance logs whenever possible" Type="Variable" Display="always" Required="false" Mask="false">true</Config>
+  <Config Name="TRIGGERS__QUEUECLEANER" Target="TRIGGERS__QUEUECLEANER" Default="0 0/5 * * * ?" Mode="" Description="Required if queue cleaner is enabled - Quartz cron trigger. Can be a max of 1h interval." Type="Variable" Display="always" Required="true" Mask="false">0 0/5 * * * ?</Config>
+  <Config Name="TRIGGERS__CONTENTBLOCKER" Target="TRIGGERS__CONTENTBLOCKER" Default="0 0/5 * * * ?" Mode="" Description="Required if content blocker is enabled - Quartz cron trigger. Can be a max of 1h interval." Type="Variable" Display="always" Required="true" Mask="false">0 0/5 * * * ?</Config>
+  <Config Name="QUEUECLEANER__ENABLED" Target="QUEUECLEANER__ENABLED" Default="false|true" Mode="" Description="Enable or disable the queue cleaner" Type="Variable" Display="always" Required="false" Mask="false">true</Config>
+  <Config Name="QUEUECLEANER__RUNSEQUENTIALLY" Target="QUEUECLEANER__RUNSEQUENTIALLY" Default="false|true" Mode="" Description="Run queue cleaner after content blocker instead of parallel execution" Type="Variable" Display="always" Required="false" Mask="false">true</Config>
+  <Config Name="QUEUECLEANER__IMPORT_FAILED_MAX_STRIKES" Target="QUEUECLEANER__IMPORT_FAILED_MAX_STRIKES" Default="0" Mode="" Description="Number of strikes before removing failed imports (0 means never)" Type="Variable" Display="always" Required="false" Mask="false">0</Config>
+  <Config Name="QUEUECLEANER__STALLED_MAX_STRIKES" Target="QUEUECLEANER__STALLED_MAX_STRIKES" Default="0" Mode="" Description="Number of strikes before removing stalled downloads (0 means never)" Type="Variable" Display="always" Required="false" Mask="false">0</Config>
+  <Config Name="CONTENTBLOCKER__ENABLED" Target="CONTENTBLOCKER__ENABLED" Default="false|true" Mode="" Description="Enable or disable the content blocker" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
+  <Config Name="CONTENTBLOCKER__BLACKLIST__ENABLED" Target="CONTENTBLOCKER__BLACKLIST__ENABLED" Default="false|true" Mode="" Description="Enable or disable the blacklist" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
+  <Config Name="CONTENTBLOCKER__BLACKLIST__PATH" Target="CONTENTBLOCKER__BLACKLIST__PATH" Default="" Mode="" Description="Path to the blacklist (local file or URL). Needs to be JSON compatible." Type="Variable" Display="always" Required="false" Mask="false"></Config>
+  <Config Name="CONTENTBLOCKER__WHITELIST__ENABLED" Target="CONTENTBLOCKER__WHITELIST__ENABLED" Default="false|true" Mode="" Description="Enable or disable the whitelist" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
+  <Config Name="CONTENTBLOCKER__WHITELIST__PATH" Target="CONTENTBLOCKER__WHITELIST__PATH" Default="" Mode="" Description="Path to the whitelist (local file or URL). Needs to be JSON compatible." Type="Variable" Display="always" Required="false" Mask="false"></Config>
+  <Config Name="DOWNLOAD_CLIENT" Target="DOWNLOAD_CLIENT" Default="qbittorrent|deluge|transmission" Mode="" Description="Download client used by *arrs. Can be qbittorrent, deluge, or transmission" Type="Variable" Display="always" Required="false" Mask="false">qbittorrent</Config>
+  <Config Name="QBITTORRENT__URL" Target="QBITTORRENT__URL" Default="http://localhost:8112" Mode="" Description="qBittorrent instance URL" Type="Variable" Display="always" Required="false" Mask="false">http://localhost:8112</Config>
+  <Config Name="QBITTORRENT__USERNAME" Target="QBITTORRENT__USERNAME" Default="" Mode="" Description="qBittorrent username" Type="Variable" Display="always" Required="false" Mask="false"></Config>
+  <Config Name="QBITTORRENT__PASSWORD" Target="QBITTORRENT__PASSWORD" Default="" Mode="" Description="qBittorrent password" Type="Variable" Display="always" Required="false" Mask="false"></Config>
+  <Config Name="DELUGE__URL" Target="DELUGE__URL" Default="http://localhost:8080" Mode="" Description="Deluge instance URL" Type="Variable" Display="always" Required="false" Mask="false">http://localhost:8080</Config>
+  <Config Name="DELUGE__PASSWORD" Target="DELUGE__PASSWORD" Default="" Mode="" Description="Deluge password" Type="Variable" Display="always" Required="false" Mask="false"></Config>
+  <Config Name="TRANSMISSION__URL" Target="TRANSMISSION__URL" Default="http://localhost:9091" Mode="" Description="Transmission instance URL" Type="Variable" Display="always" Required="false" Mask="false">http://localhost:9091</Config>
+  <Config Name="TRANSMISSION__USERNAME" Target="TRANSMISSION__USERNAME" Default="" Mode="" Description="Transmission username" Type="Variable" Display="always" Required="false" Mask="false"></Config>
+  <Config Name="TRANSMISSION__PASSWORD" Target="TRANSMISSION__PASSWORD" Default="" Mode="" Description="Transmission password" Type="Variable" Display="always" Required="false" Mask="false"></Config>
+  <Config Name="SONARR__ENABLED" Target="SONARR__ENABLED" Default="false|true" Mode="" Description="Enable or disable Sonarr cleanup" Type="Variable" Display="always" Required="false" Mask="false">true</Config>
+  <Config Name="SONARR__SEARCHTYPE" Target="SONARR__SEARCHTYPE" Default="Episode|Season|Series" Mode="" Description="What to search for after removing a queue item" Type="Variable" Display="always" Required="false" Mask="false">Episode</Config>
+  <Config Name="SONARR__INSTANCES__0__URL" Target="SONARR__INSTANCES__0__URL" Default="http://localhost:8989" Mode="" Description="First Sonarr instance url" Type="Variable" Display="always" Required="false" Mask="false">http://localhost:8989</Config>
+  <Config Name="SONARR__INSTANCES__0__APIKEY" Target="SONARR__INSTANCES__0__APIKEY" Default="apikey" Mode="" Description="First Sonarr instance API key" Type="Variable" Display="always" Required="false" Mask="false">apikey</Config>
+  <Config Name="RADARR__ENABLED" Target="RADARR__ENABLED" Default="false|true" Mode="" Description="Whether Radarr cleanup is enabled or not" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
+  <Config Name="RADARR__INSTANCES__0__URL" Target="RADARR__INSTANCES__0__URL" Default="http://localhost:8989" Mode="" Description="First Radarr instance url" Type="Variable" Display="always" Required="false" Mask="false">http://localhost:8989</Config>
+  <Config Name="RADARR__INSTANCES__0__APIKEY" Target="RADARR__INSTANCES__0__APIKEY" Default="apikey" Mode="" Description="First Radarr instance API key" Type="Variable" Display="always" Required="false" Mask="false">apikey</Config>
+</Container>
