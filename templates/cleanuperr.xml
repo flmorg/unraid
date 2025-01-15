@@ -71,4 +71,7 @@ For a detailed guide on how to use it, check out the project's GitHub page.
   <Config Name="RADARR__ENABLED" Target="RADARR__ENABLED" Default="false|true" Mode="" Description="Whether Radarr cleanup is enabled or not" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
   <Config Name="RADARR__INSTANCES__0__URL" Target="RADARR__INSTANCES__0__URL" Default="http://localhost:8989" Mode="" Description="First Radarr instance url" Type="Variable" Display="always" Required="false" Mask="false">http://localhost:7878</Config>
   <Config Name="RADARR__INSTANCES__0__APIKEY" Target="RADARR__INSTANCES__0__APIKEY" Default="apikey" Mode="" Description="First Radarr instance API key" Type="Variable" Display="always" Required="false" Mask="true"></Config>
+
+  <Config Name="HTTP_MAX_RETRIES" Target="QBITTORRENT__USERNAME" Default="0" Mode="" Description="The number of times to retry a failed HTTP call (to *arrs, download clients etc.)" Type="Variable" Display="advanced" Required="false" Mask="false">0</Config>
+  <Config Name="HTTP_TIMEOUT" Target="QBITTORRENT__USERNAME" Default="100" Mode="" Description="The number of seconds to wait before failing an HTTP call (to *arrs, download clients etc.)" Type="Variable" Display="advanced" Required="false" Mask="false">100</Config>
 </Container>
