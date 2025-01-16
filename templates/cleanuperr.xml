@@ -67,18 +67,18 @@ For a detailed guide on how to use it, check out the project's GitHub page.
   <Config Name="SONARR__INSTANCES__0__URL" Target="SONARR__INSTANCES__0__URL" Default="http://localhost:8989" Mode="" Description="First Sonarr instance url" Type="Variable" Display="always" Required="false" Mask="false">http://localhost:8989</Config>
   <Config Name="SONARR__INSTANCES__0__APIKEY" Target="SONARR__INSTANCES__0__APIKEY" Default="apikey" Mode="" Description="First Sonarr instance API key" Type="Variable" Display="always" Required="false" Mask="true"></Config>
 
-  <Config Name="RADARR__ENABLED" Target="RADARR__ENABLED" Default="false|true" Mode="" Description="Whether Radarr cleanup is enabled or not" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
+  <Config Name="RADARR__ENABLED" Target="RADARR__ENABLED" Default="false|true" Mode="" Description="Enable or disable Radarr cleanup" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
   <Config Name="RADARR__BLOCK__TYPE" Target="RADARR__BLOCK__TYPE" Default="blacklist|whitelist" Mode="" Description="The type of blocklist" Type="Variable" Display="always" Required="false" Mask="false">blacklist</Config>
   <Config Name="RADARR__BLOCK__PATH" Target="RADARR__BLOCK__PATH" Default="" Mode="" Description="Local path or url of the blocklist" Type="Variable" Display="always" Required="false" Mask="false"></Config>
   <Config Name="RADARR__INSTANCES__0__URL" Target="RADARR__INSTANCES__0__URL" Default="http://localhost:7878" Mode="" Description="First Radarr instance url" Type="Variable" Display="always" Required="false" Mask="false">http://localhost:7878</Config>
   <Config Name="RADARR__INSTANCES__0__APIKEY" Target="RADARR__INSTANCES__0__APIKEY" Default="apikey" Mode="" Description="First Radarr instance API key" Type="Variable" Display="always" Required="false" Mask="true"></Config>
 
-  <Config Name="LIDARR__ENABLED" Target="RADARR__ENABLED" Default="false|true" Mode="" Description="Whether Radarr cleanup is enabled or not" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
+  <Config Name="LIDARR__ENABLED" Target="LIDARR__ENABLED" Default="false|true" Mode="" Description="Enable or disable Lidarr cleanup" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
   <Config Name="LIDARR__BLOCK__TYPE" Target="LIDARR__BLOCK__TYPE" Default="blacklist|whitelist" Mode="" Description="The type of blocklist" Type="Variable" Display="always" Required="false" Mask="false">blacklist</Config>
   <Config Name="LIDARR__BLOCK__PATH" Target="LIDARR__BLOCK__PATH" Default="" Mode="" Description="Local path or url of the blocklist" Type="Variable" Display="always" Required="false" Mask="false"></Config>
-  <Config Name="LIDARR__INSTANCES__0__URL" Target="LIDARR__INSTANCES__0__URL" Default="http://localhost:8686" Mode="" Description="First Radarr instance url" Type="Variable" Display="always" Required="false" Mask="false">http://localhost:7878</Config>
-  <Config Name="LIDARR__INSTANCES__0__APIKEY" Target="LIDARR__INSTANCES__0__APIKEY" Default="apikey" Mode="" Description="First Radarr instance API key" Type="Variable" Display="always" Required="false" Mask="true"></Config>
+  <Config Name="LIDARR__INSTANCES__0__URL" Target="LIDARR__INSTANCES__0__URL" Default="http://localhost:8686" Mode="" Description="First Lidarr instance url" Type="Variable" Display="always" Required="false" Mask="false">http://localhost:8686</Config>
+  <Config Name="LIDARR__INSTANCES__0__APIKEY" Target="LIDARR__INSTANCES__0__APIKEY" Default="apikey" Mode="" Description="First Lidarr instance API key" Type="Variable" Display="always" Required="false" Mask="true"></Config>
 
-  <Config Name="HTTP_MAX_RETRIES" Target="QBITTORRENT__USERNAME" Default="0" Mode="" Description="The number of times to retry a failed HTTP call (to *arrs, download clients etc.)" Type="Variable" Display="advanced" Required="false" Mask="false">0</Config>
-  <Config Name="HTTP_TIMEOUT" Target="QBITTORRENT__USERNAME" Default="100" Mode="" Description="The number of seconds to wait before failing an HTTP call (to *arrs, download clients etc.)" Type="Variable" Display="advanced" Required="false" Mask="false">100</Config>
+  <Config Name="HTTP_MAX_RETRIES" Target="HTTP_MAX_RETRIES" Default="0" Mode="" Description="The number of times to retry a failed HTTP call (to *arrs, download clients etc.)" Type="Variable" Display="advanced" Required="false" Mask="false">0</Config>
+  <Config Name="HTTP_TIMEOUT" Target="HTTP_TIMEOUT" Default="100" Mode="" Description="The number of seconds to wait before failing an HTTP call (to *arrs, download clients etc.)" Type="Variable" Display="advanced" Required="false" Mask="false">100</Config>
 </Container>
