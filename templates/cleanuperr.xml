@@ -31,14 +31,17 @@ For a detailed guide on how to use it, check out the project's GitHub page.
       <Mode>rw</Mode>
     </Volume>
   </Data>
+  <Config Name="DRY_RUN" Target="DRY_RUN" Default="false|true" Mode="" Description="When enabled, simulates irreversible operations without making actual changes" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
+
   <Config Name="LOGGING__LOGLEVEL" Target="LOGGING__LOGLEVEL" Default="Verbose|Debug|Information|Warning|Error|Fatal" Mode="" Description="Can be Verbose, Debug, Information, Warning, Error, or Fatal" Type="Variable" Display="always" Required="false" Mask="false">Information</Config>
   <Config Name="LOGGING__FILE__ENABLED" Target="LOGGING__FILE__ENABLED" Default="false|true" Mode="" Description="Enable or disable logging to file" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
   <Config Name="LOGGING__FILE__PATH" Target="LOGGING__FILE__PATH" Default="/var/logs" Mode="" Description="Directory where to save the log files" Type="Variable" Display="always" Required="false" Mask="false">/var/logs</Config>
   <Config Name="LOGGING__ENHANCED" Target="LOGGING__ENHANCED" Default="false|true" Mode="" Description="Enhance logs whenever possible" Type="Variable" Display="always" Required="false" Mask="false">true</Config>
   
-  <Config Name="TRIGGERS__QUEUECLEANER" Target="TRIGGERS__QUEUECLEANER" Default="0 0/5 * * * ?" Mode="" Description="Required if queue cleaner is enabled - Quartz cron trigger. Can be a max of 1h interval." Type="Variable" Display="always" Required="true" Mask="false">0 0/5 * * * ?</Config>
-  <Config Name="TRIGGERS__CONTENTBLOCKER" Target="TRIGGERS__CONTENTBLOCKER" Default="0 0/5 * * * ?" Mode="" Description="Required if content blocker is enabled - Quartz cron trigger. Can be a max of 1h interval." Type="Variable" Display="always" Required="true" Mask="false">0 0/5 * * * ?</Config>
-  
+  <Config Name="TRIGGERS__QUEUECLEANER" Target="TRIGGERS__QUEUECLEANER" Default="0 0/5 * * * ?" Mode="" Description="Required if queue cleaner is enabled - Quartz cron trigger. Can be a max of 6h interval." Type="Variable" Display="always" Required="true" Mask="false">0 0/5 * * * ?</Config>
+  <Config Name="TRIGGERS__CONTENTBLOCKER" Target="TRIGGERS__CONTENTBLOCKER" Default="0 0/5 * * * ?" Mode="" Description="Required if content blocker is enabled - Quartz cron trigger. Can be a max of 6h interval." Type="Variable" Display="always" Required="true" Mask="false">0 0/5 * * * ?</Config>
+  <Config Name="TRIGGERS__DOWNLOADCLEANER" Target="TRIGGERS__DOWNLOADCLEANER" Default="0 0 * * * ?" Mode="" Description="Required if download cleaner is enabled - Quartz cron trigger. Can be a max of 6h interval." Type="Variable" Display="always" Required="false" Mask="false">0 0 * * * ?</Config>
+
   <Config Name="QUEUECLEANER__ENABLED" Target="QUEUECLEANER__ENABLED" Default="false|true" Mode="" Description="Enable or disable the queue cleaner" Type="Variable" Display="always" Required="false" Mask="false">true</Config>
   <Config Name="QUEUECLEANER__RUNSEQUENTIALLY" Target="QUEUECLEANER__RUNSEQUENTIALLY" Default="false|true" Mode="" Description="Run queue cleaner after content blocker instead of parallel execution" Type="Variable" Display="always" Required="false" Mask="false">true</Config>
   
@@ -55,7 +58,14 @@ For a detailed guide on how to use it, check out the project's GitHub page.
   <Config Name="CONTENTBLOCKER__ENABLED" Target="CONTENTBLOCKER__ENABLED" Default="false|true" Mode="" Description="Enable or disable the content blocker" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
   <Config Name="CONTENTBLOCKER__IGNORE_PRIVATE" Target="CONTENTBLOCKER__IGNORE_PRIVATE" Default="false|true" Mode="" Description="Whether to ignore downloads from private trackers" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
   <Config Name="CONTENTBLOCKER__DELETE_PRIVATE" Target="CONTENTBLOCKER__DELETE_PRIVATE" Default="false|true" Mode="" Description="Whether to delete private downloads that have all files blocked from the download client" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
-  
+
+  <Config Name="DOWNLOADCLEANER__ENABLED" Target="DOWNLOADCLEANER__ENABLED" Default="false|true" Mode="" Description="Enable or disable the download cleaner" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
+  <Config Name="DOWNLOADCLEANER__DELETE_PRIVATE" Target="DOWNLOADCLEANER__DELETE_PRIVATE" Default="false|true" Mode="" Description="Whether to delete private downloads that have met the criteria" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
+  <Config Name="DOWNLOADCLEANER__CATEGORIES__0__NAME" Target="DOWNLOADCLEANER__CATEGORIES__0__NAME" Default="" Mode="" Description="Name of the first category to clean" Type="Variable" Display="always" Required="false" Mask="false"></Config>
+  <Config Name="DOWNLOADCLEANER__CATEGORIES__0__MAX_RATIO" Target="DOWNLOADCLEANER__CATEGORIES__0__MAX_RATIO" Default="-1" Mode="" Description="Maximum ratio to reach before removing a download (-1 means no limit)" Type="Variable" Display="always" Required="false" Mask="false">-1</Config>
+  <Config Name="DOWNLOADCLEANER__CATEGORIES__0__MIN_SEED_TIME" Target="DOWNLOADCLEANER__CATEGORIES__0__MIN_SEED_TIME" Default="0" Mode="" Description="Minimum number of hours to seed before removing a download" Type="Variable" Display="always" Required="false" Mask="false">0</Config>
+  <Config Name="DOWNLOADCLEANER__CATEGORIES__0__MAX_SEED_TIME" Target="DOWNLOADCLEANER__CATEGORIES__0__MAX_SEED_TIME" Default="-1" Mode="" Description="Maximum number of hours to seed before removing a download (-1 means no limit)" Type="Variable" Display="always" Required="false" Mask="false">-1</Config>
+
   <Config Name="DOWNLOAD_CLIENT" Target="DOWNLOAD_CLIENT" Default="qbittorrent|deluge|transmission" Mode="" Description="Download client used by *arrs. Can be qbittorrent, deluge, or transmission" Type="Variable" Display="always" Required="false" Mask="false">qbittorrent</Config>
   <Config Name="QBITTORRENT__URL" Target="QBITTORRENT__URL" Default="http://localhost:8080" Mode="" Description="qBittorrent instance URL" Type="Variable" Display="always" Required="false" Mask="false">http://localhost:8080</Config>
   <Config Name="QBITTORRENT__USERNAME" Target="QBITTORRENT__USERNAME" Default="" Mode="" Description="qBittorrent username" Type="Variable" Display="always" Required="false" Mask="false"></Config>
@@ -84,6 +94,13 @@ For a detailed guide on how to use it, check out the project's GitHub page.
   <Config Name="LIDARR__BLOCK__PATH" Target="LIDARR__BLOCK__PATH" Default="" Mode="" Description="Local path or url of the blocklist" Type="Variable" Display="always" Required="false" Mask="false"></Config>
   <Config Name="LIDARR__INSTANCES__0__URL" Target="LIDARR__INSTANCES__0__URL" Default="http://localhost:8686" Mode="" Description="First Lidarr instance url" Type="Variable" Display="always" Required="false" Mask="false">http://localhost:8686</Config>
   <Config Name="LIDARR__INSTANCES__0__APIKEY" Target="LIDARR__INSTANCES__0__APIKEY" Default="apikey" Mode="" Description="First Lidarr instance API key" Type="Variable" Display="always" Required="false" Mask="true"></Config>
+
+  <Config Name="NOTIFIARR__API_KEY" Target="NOTIFIARR__API_KEY" Default="" Mode="" Description="Notifiarr API key for sending notifications" Type="Variable" Display="always" Required="false" Mask="true"></Config>
+  <Config Name="NOTIFIARR__CHANNEL_ID" Target="NOTIFIARR__CHANNEL_ID" Default="" Mode="" Description="Discord channel ID where notifications will be sent" Type="Variable" Display="always" Required="false" Mask="false"></Config>
+  <Config Name="NOTIFIARR__ON_IMPORT_FAILED_STRIKE" Target="NOTIFIARR__ON_IMPORT_FAILED_STRIKE" Default="false|true" Mode="" Description="Whether to notify when an item receives a failed import strike" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
+  <Config Name="NOTIFIARR__ON_STALLED_STRIKE" Target="NOTIFIARR__ON_STALLED_STRIKE" Default="false|true" Mode="" Description="Whether to notify when an item receives a stalled download strike" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
+  <Config Name="NOTIFIARR__ON_QUEUE_ITEM_DELETED" Target="NOTIFIARR__ON_QUEUE_ITEM_DELETED" Default="false|true" Mode="" Description="Whether to notify when a queue item is deleted" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
+  <Config Name="NOTIFIARR__ON_DOWNLOAD_CLEANED" Target="NOTIFIARR__ON_DOWNLOAD_CLEANED" Default="false|true" Mode="" Description="Whether to notify when a download is cleaned" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
 
   <Config Name="HTTP_MAX_RETRIES" Target="HTTP_MAX_RETRIES" Default="0" Mode="" Description="The number of times to retry a failed HTTP call (to *arrs, download clients etc.)" Type="Variable" Display="advanced" Required="false" Mask="false">0</Config>
   <Config Name="HTTP_TIMEOUT" Target="HTTP_TIMEOUT" Default="100" Mode="" Description="The number of seconds to wait before failing an HTTP call (to *arrs, download clients etc.)" Type="Variable" Display="advanced" Required="false" Mask="false">100</Config>
