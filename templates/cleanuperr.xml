@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Container version="1.3.5">
+<Container version="1.5.7">
   <Name>cleanuperr</Name>
   <Repository>ghcr.io/flmorg/cleanuperr:latest</Repository>
   <Registry>https://github.com/flmorg/cleanuperr/pkgs/container/cleanuperr</Registry>
@@ -31,6 +31,7 @@ For a detailed guide on how to use it, check out the project's GitHub page.
       <Mode>rw</Mode>
     </Volume>
   </Data>
+  <Config Name="TZ" Target="TZ" Default="Etc/UTC" Mode="" Description="The time zone to use" Type="Variable" Display="always" Required="false" Mask="false">Etc/UTC</Config>
   <Config Name="DRY_RUN" Target="DRY_RUN" Default="false|true" Mode="" Description="When enabled, simulates irreversible operations without making actual changes" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
 
   <Config Name="LOGGING__LOGLEVEL" Target="LOGGING__LOGLEVEL" Default="Verbose|Debug|Information|Warning|Error|Fatal" Mode="" Description="Can be Verbose, Debug, Information, Warning, Error, or Fatal" Type="Variable" Display="always" Required="false" Mask="false">Information</Config>
