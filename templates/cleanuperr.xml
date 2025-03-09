@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Container version="1.5.7">
+<Container version="1.5.11">
   <Name>cleanuperr</Name>
   <Repository>ghcr.io/flmorg/cleanuperr:latest</Repository>
   <Registry>https://github.com/flmorg/cleanuperr/pkgs/container/cleanuperr</Registry>
@@ -44,6 +44,7 @@ For a detailed guide on how to use it, check out the project's GitHub page.
   <Config Name="TRIGGERS__DOWNLOADCLEANER" Target="TRIGGERS__DOWNLOADCLEANER" Default="0 0 * * * ?" Mode="" Description="Required if download cleaner is enabled - Quartz cron trigger. Can be a max of 6h interval." Type="Variable" Display="always" Required="false" Mask="false">0 0 * * * ?</Config>
 
   <Config Name="QUEUECLEANER__ENABLED" Target="QUEUECLEANER__ENABLED" Default="false|true" Mode="" Description="Enable or disable the queue cleaner" Type="Variable" Display="always" Required="false" Mask="false">true</Config>
+  <Config Name="QUEUECLEANER__IGNORED_DOWNLOADS_PATH" Target="QUEUECLEANER__IGNORED_DOWNLOADS_PATH" Default="" Mode="" Description="Local path to the file containing ignored downloads" Type="Variable" Display="always" Required="false" Mask="false"></Config>
   <Config Name="QUEUECLEANER__RUNSEQUENTIALLY" Target="QUEUECLEANER__RUNSEQUENTIALLY" Default="false|true" Mode="" Description="Run queue cleaner after content blocker instead of parallel execution" Type="Variable" Display="always" Required="false" Mask="false">true</Config>
   
   <Config Name="QUEUECLEANER__IMPORT_FAILED_MAX_STRIKES" Target="QUEUECLEANER__IMPORT_FAILED_MAX_STRIKES" Default="0" Mode="" Description="Number of strikes before removing failed imports (0 means never)" Type="Variable" Display="always" Required="false" Mask="false">0</Config>
@@ -57,10 +58,12 @@ For a detailed guide on how to use it, check out the project's GitHub page.
   <Config Name="QUEUECLEANER__STALLED_DELETE_PRIVATE" Target="QUEUECLEANER__STALLED_DELETE_PRIVATE" Default="false|true" Mode="" Description="Whether to delete stalled private downloads from the download client" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
   
   <Config Name="CONTENTBLOCKER__ENABLED" Target="CONTENTBLOCKER__ENABLED" Default="false|true" Mode="" Description="Enable or disable the content blocker" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
+  <Config Name="CONTENTBLOCKER__IGNORED_DOWNLOADS_PATH" Target="CONTENTBLOCKER__IGNORED_DOWNLOADS_PATH" Default="" Mode="" Description="Local path to the file containing ignored downloads" Type="Variable" Display="always" Required="false" Mask="false"></Config>
   <Config Name="CONTENTBLOCKER__IGNORE_PRIVATE" Target="CONTENTBLOCKER__IGNORE_PRIVATE" Default="false|true" Mode="" Description="Whether to ignore downloads from private trackers" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
   <Config Name="CONTENTBLOCKER__DELETE_PRIVATE" Target="CONTENTBLOCKER__DELETE_PRIVATE" Default="false|true" Mode="" Description="Whether to delete private downloads that have all files blocked from the download client" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
 
   <Config Name="DOWNLOADCLEANER__ENABLED" Target="DOWNLOADCLEANER__ENABLED" Default="false|true" Mode="" Description="Enable or disable the download cleaner" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
+  <Config Name="DOWNLOADCLEANER__IGNORED_DOWNLOADS_PATH" Target="DOWNLOADCLEANER__IGNORED_DOWNLOADS_PATH" Default="" Mode="" Description="Local path to the file containing ignored downloads" Type="Variable" Display="always" Required="false" Mask="false"></Config>
   <Config Name="DOWNLOADCLEANER__DELETE_PRIVATE" Target="DOWNLOADCLEANER__DELETE_PRIVATE" Default="false|true" Mode="" Description="Whether to delete private downloads that have met the criteria" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
   <Config Name="DOWNLOADCLEANER__CATEGORIES__0__NAME" Target="DOWNLOADCLEANER__CATEGORIES__0__NAME" Default="" Mode="" Description="Name of the first category to clean" Type="Variable" Display="always" Required="false" Mask="false"></Config>
   <Config Name="DOWNLOADCLEANER__CATEGORIES__0__MAX_RATIO" Target="DOWNLOADCLEANER__CATEGORIES__0__MAX_RATIO" Default="-1" Mode="" Description="Maximum ratio to reach before removing a download (-1 means no limit)" Type="Variable" Display="always" Required="false" Mask="false">-1</Config>
