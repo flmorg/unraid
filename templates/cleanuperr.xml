@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Container version="1.5.11">
+<Container version="1.5.17">
   <Name>cleanuperr</Name>
   <Repository>ghcr.io/flmorg/cleanuperr:latest</Repository>
   <Registry>https://github.com/flmorg/cleanuperr/pkgs/container/cleanuperr</Registry>
@@ -72,11 +72,14 @@ For a detailed guide on how to use it, check out the project's GitHub page.
 
   <Config Name="DOWNLOAD_CLIENT" Target="DOWNLOAD_CLIENT" Default="qbittorrent|deluge|transmission" Mode="" Description="Download client used by *arrs. Can be qbittorrent, deluge, or transmission" Type="Variable" Display="always" Required="false" Mask="false">qbittorrent</Config>
   <Config Name="QBITTORRENT__URL" Target="QBITTORRENT__URL" Default="http://localhost:8080" Mode="" Description="qBittorrent instance URL" Type="Variable" Display="always" Required="false" Mask="false">http://localhost:8080</Config>
+  <Config Name="QBITTORRENT__URL_BASE" Target="QBITTORRENT__URL_BASE" Default="" Mode="" Description="Adds a prefix to the qBittorrent url" Type="Variable" Display="always" Required="false" Mask="false"></Config>
   <Config Name="QBITTORRENT__USERNAME" Target="QBITTORRENT__USERNAME" Default="" Mode="" Description="qBittorrent username" Type="Variable" Display="always" Required="false" Mask="false"></Config>
   <Config Name="QBITTORRENT__PASSWORD" Target="QBITTORRENT__PASSWORD" Default="" Mode="" Description="qBittorrent password" Type="Variable" Display="always" Required="false" Mask="true"></Config>
   <Config Name="DELUGE__URL" Target="DELUGE__URL" Default="http://localhost:8112" Mode="" Description="Deluge instance URL" Type="Variable" Display="always" Required="false" Mask="false">http://localhost:8112</Config>
+  <Config Name="DELUGE__URL_BASE" Target="DELUGE__URL_BASE" Default="" Mode="" Description="Adds a prefix to the deluge json url" Type="Variable" Display="always" Required="false" Mask="false"></Config>
   <Config Name="DELUGE__PASSWORD" Target="DELUGE__PASSWORD" Default="" Mode="" Description="Deluge password" Type="Variable" Display="always" Required="false" Mask="true"></Config>
   <Config Name="TRANSMISSION__URL" Target="TRANSMISSION__URL" Default="http://localhost:9091" Mode="" Description="Transmission instance URL" Type="Variable" Display="always" Required="false" Mask="false">http://localhost:9091</Config>
+  <Config Name="TRANSMISSION__URL_BASE" Target="TRANSMISSION__URL_BASE" Default="transmission" Mode="" Description="Adds a prefix to the Transmission rpc url" Type="Variable" Display="always" Required="false" Mask="false">transmission</Config>
   <Config Name="TRANSMISSION__USERNAME" Target="TRANSMISSION__USERNAME" Default="" Mode="" Description="Transmission username" Type="Variable" Display="always" Required="false" Mask="false"></Config>
   <Config Name="TRANSMISSION__PASSWORD" Target="TRANSMISSION__PASSWORD" Default="" Mode="" Description="Transmission password" Type="Variable" Display="always" Required="false" Mask="true"></Config>
   
@@ -108,4 +111,12 @@ For a detailed guide on how to use it, check out the project's GitHub page.
 
   <Config Name="HTTP_MAX_RETRIES" Target="HTTP_MAX_RETRIES" Default="0" Mode="" Description="The number of times to retry a failed HTTP call (to *arrs, download clients etc.)" Type="Variable" Display="advanced" Required="false" Mask="false">0</Config>
   <Config Name="HTTP_TIMEOUT" Target="HTTP_TIMEOUT" Default="100" Mode="" Description="The number of seconds to wait before failing an HTTP call (to *arrs, download clients etc.)" Type="Variable" Display="advanced" Required="false" Mask="false">100</Config>
+
+  <Config Name="QUEUECLEANER__SLOW_MAX_STRIKES" Target="QUEUECLEANER__SLOW_MAX_STRIKES" Default="0" Mode="" Description="Number of strikes before removing slow downloads (0 means never)" Type="Variable" Display="always" Required="false" Mask="false">0</Config>
+  <Config Name="QUEUECLEANER__SLOW_RESET_STRIKES_ON_PROGRESS" Target="QUEUECLEANER__SLOW_RESET_STRIKES_ON_PROGRESS" Default="false|true" Mode="" Description="Whether to remove strikes if the download speed or estimated time are not slow anymore" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
+  <Config Name="QUEUECLEANER__SLOW_IGNORE_PRIVATE" Target="QUEUECLEANER__SLOW_IGNORE_PRIVATE" Default="false|true" Mode="" Description="Whether to ignore slow downloads from private trackers" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
+  <Config Name="QUEUECLEANER__SLOW_DELETE_PRIVATE" Target="QUEUECLEANER__SLOW_DELETE_PRIVATE" Default="false|true" Mode="" Description="Whether to delete slow private downloads from the download client" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
+  <Config Name="QUEUECLEANER__SLOW_MIN_SPEED" Target="QUEUECLEANER__SLOW_MIN_SPEED" Default="" Mode="" Description="The minimum speed a download should have (e.g. 1.5KB, 400KB, 2MB)" Type="Variable" Display="always" Required="false" Mask="false"></Config>
+  <Config Name="QUEUECLEANER__SLOW_MAX_TIME" Target="QUEUECLEANER__SLOW_MAX_TIME" Default="0" Mode="" Description="The maximum estimated hours a download should take to finish" Type="Variable" Display="always" Required="false" Mask="false">0</Config>
+  <Config Name="QUEUECLEANER__SLOW_IGNORE_ABOVE_SIZE" Target="QUEUECLEANER__SLOW_IGNORE_ABOVE_SIZE" Default="" Mode="" Description="Downloads above this size will not be removed for being slow (e.g. 10KB, 200MB, 3GB)" Type="Variable" Display="always" Required="false" Mask="false"></Config>
 </Container>
