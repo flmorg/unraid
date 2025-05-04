@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<Container version="1.5.17">
+<Container version="1.6.0">
   <Name>cleanuperr</Name>
   <Repository>ghcr.io/flmorg/cleanuperr:latest</Repository>
   <Registry>https://github.com/flmorg/cleanuperr/pkgs/container/cleanuperr</Registry>
@@ -56,7 +56,8 @@ For a detailed guide on how to use it, check out the project's GitHub page.
   <Config Name="QUEUECLEANER__STALLED_RESET_STRIKES_ON_PROGRESS" Target="QUEUECLEANER__STALLED_RESET_STRIKES_ON_PROGRESS" Default="false|true" Mode="" Description="Whether to remove strikes if any download progress was made since last checked." Type="Variable" Display="always" Required="false" Mask="false">false</Config>
   <Config Name="QUEUECLEANER__STALLED_IGNORE_PRIVATE" Target="QUEUECLEANER__STALLED_IGNORE_PRIVATE" Default="false|true" Mode="" Description="Whether to ignore stalled downloads from private trackers" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
   <Config Name="QUEUECLEANER__STALLED_DELETE_PRIVATE" Target="QUEUECLEANER__STALLED_DELETE_PRIVATE" Default="false|true" Mode="" Description="Whether to delete stalled private downloads from the download client" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
-  
+  <Config Name="QUEUECLEANER__DOWNLOADING_METADATA_MAX_STRIKES" Target="QUEUECLEANER__DOWNLOADING_METADATA_MAX_STRIKES" Default="0" Mode="" Description="Number of strikes before removing a download stuck while downloading metadata (0 means never)." Type="Variable" Display="always" Required="false" Mask="false">0</Config>
+
   <Config Name="CONTENTBLOCKER__ENABLED" Target="CONTENTBLOCKER__ENABLED" Default="false|true" Mode="" Description="Enable or disable the content blocker" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
   <Config Name="CONTENTBLOCKER__IGNORED_DOWNLOADS_PATH" Target="CONTENTBLOCKER__IGNORED_DOWNLOADS_PATH" Default="" Mode="" Description="Local path to the file containing ignored downloads" Type="Variable" Display="always" Required="false" Mask="false"></Config>
   <Config Name="CONTENTBLOCKER__IGNORE_PRIVATE" Target="CONTENTBLOCKER__IGNORE_PRIVATE" Default="false|true" Mode="" Description="Whether to ignore downloads from private trackers" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
@@ -69,6 +70,9 @@ For a detailed guide on how to use it, check out the project's GitHub page.
   <Config Name="DOWNLOADCLEANER__CATEGORIES__0__MAX_RATIO" Target="DOWNLOADCLEANER__CATEGORIES__0__MAX_RATIO" Default="-1" Mode="" Description="Maximum ratio to reach before removing a download (-1 means no limit)" Type="Variable" Display="always" Required="false" Mask="false">-1</Config>
   <Config Name="DOWNLOADCLEANER__CATEGORIES__0__MIN_SEED_TIME" Target="DOWNLOADCLEANER__CATEGORIES__0__MIN_SEED_TIME" Default="0" Mode="" Description="Minimum number of hours to seed before removing a download" Type="Variable" Display="always" Required="false" Mask="false">0</Config>
   <Config Name="DOWNLOADCLEANER__CATEGORIES__0__MAX_SEED_TIME" Target="DOWNLOADCLEANER__CATEGORIES__0__MAX_SEED_TIME" Default="-1" Mode="" Description="Maximum number of hours to seed before removing a download (-1 means no limit)" Type="Variable" Display="always" Required="false" Mask="false">-1</Config>
+  <Config Name="DOWNLOADCLEANER__UNLINKED_TARGET_CATEGORY" Target="DOWNLOADCLEANER__UNLINKED_TARGET_CATEGORY" Default="cleanuperr-unlinked" Mode="" Description="The category to set on downloads that do not have hardlinks." Type="Variable" Display="always" Required="false" Mask="false">cleanuperr-unlinked</Config>
+  <Config Name="DOWNLOADCLEANER__UNLINKED_IGNORED_ROOT_DIR" Target="DOWNLOADCLEANER__UNLINKED_IGNORED_ROOT_DIR" Default="" Mode="" Description="The downloads root directory where the original and cross-seed hardlinks reside. Other hardlinks will be treated as if they do not exist." Type="Variable" Display="always" Required="false" Mask="false"></Config>
+  <Config Name="DOWNLOADCLEANER__UNLINKED_CATEGORIES__0" Target="DOWNLOADCLEANER__UNLINKED_CATEGORIES__0" Default="" Mode="" Description="The first category of downloads to check for available hardlinks." Type="Variable" Display="always" Required="false" Mask="false"></Config>
 
   <Config Name="DOWNLOAD_CLIENT" Target="DOWNLOAD_CLIENT" Default="qbittorrent|deluge|transmission" Mode="" Description="Download client used by *arrs. Can be qbittorrent, deluge, or transmission" Type="Variable" Display="always" Required="false" Mask="false">qbittorrent</Config>
   <Config Name="QBITTORRENT__URL" Target="QBITTORRENT__URL" Default="http://localhost:8080" Mode="" Description="qBittorrent instance URL" Type="Variable" Display="always" Required="false" Mask="false">http://localhost:8080</Config>
@@ -106,8 +110,19 @@ For a detailed guide on how to use it, check out the project's GitHub page.
   <Config Name="NOTIFIARR__CHANNEL_ID" Target="NOTIFIARR__CHANNEL_ID" Default="" Mode="" Description="Discord channel ID where notifications will be sent" Type="Variable" Display="always" Required="false" Mask="false"></Config>
   <Config Name="NOTIFIARR__ON_IMPORT_FAILED_STRIKE" Target="NOTIFIARR__ON_IMPORT_FAILED_STRIKE" Default="false|true" Mode="" Description="Whether to notify when an item receives a failed import strike" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
   <Config Name="NOTIFIARR__ON_STALLED_STRIKE" Target="NOTIFIARR__ON_STALLED_STRIKE" Default="false|true" Mode="" Description="Whether to notify when an item receives a stalled download strike" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
+  <Config Name="NOTIFIARR__ON_SLOW_STRIKE" Target="NOTIFIARR__ON_SLOW_STRIKE" Default="false|true" Mode="" Description="Notify when an item receives a slow download strike." Type="Variable" Display="always" Required="false" Mask="false">false</Config>
   <Config Name="NOTIFIARR__ON_QUEUE_ITEM_DELETED" Target="NOTIFIARR__ON_QUEUE_ITEM_DELETED" Default="false|true" Mode="" Description="Whether to notify when a queue item is deleted" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
   <Config Name="NOTIFIARR__ON_DOWNLOAD_CLEANED" Target="NOTIFIARR__ON_DOWNLOAD_CLEANED" Default="false|true" Mode="" Description="Whether to notify when a download is cleaned" Type="Variable" Display="always" Required="false" Mask="false">false</Config>
+  <Config Name="NOTIFIARR__ON_CATEGORY_CHANGED" Target="NOTIFIARR__ON_CATEGORY_CHANGED" Default="false|true" Mode="" Description="Notify when a download's category is changed." Type="Variable" Display="always" Required="false" Mask="false">false</Config>
+
+  <Config Name="APPRISE__URL" Target="APPRISE__URL" Default="" Mode="" Description="Apprise URL where to send notifications. The /notify endpoint is automatically appended." Type="Variable" Display="always" Required="false" Mask="false"></Config>
+  <Config Name="APPRISE__KEY" Target="APPRISE__KEY" Default="" Mode="" Description="Apprise configuration key containing all 3rd party notification providers." Type="Variable" Display="always" Required="false" Mask="false"></Config>
+  <Config Name="APPRISE__ON_IMPORT_FAILED_STRIKE" Target="APPRISE__ON_IMPORT_FAILED_STRIKE" Default="false|true" Mode="" Description="Notify when an item receives a failed import strike." Type="Variable" Display="always" Required="false" Mask="false">false</Config>
+  <Config Name="APPRISE__ON_STALLED_STRIKE" Target="APPRISE__ON_STALLED_STRIKE" Default="false|true" Mode="" Description="Notify when an item receives a stalled download strike." Type="Variable" Display="always" Required="false" Mask="false">false</Config>
+  <Config Name="APPRISE__ON_SLOW_STRIKE" Target="APPRISE__ON_SLOW_STRIKE" Default="false|true" Mode="" Description="Notify when an item receives a slow download strike." Type="Variable" Display="always" Required="false" Mask="false">false</Config>
+  <Config Name="APPRISE__ON_QUEUE_ITEM_DELETED" Target="APPRISE__ON_QUEUE_ITEM_DELETED" Default="false|true" Mode="" Description="Notify when a queue item is deleted." Type="Variable" Display="always" Required="false" Mask="false">false</Config>
+  <Config Name="APPRISE__ON_DOWNLOAD_CLEANED" Target="APPRISE__ON_DOWNLOAD_CLEANED" Default="false|true" Mode="" Description="Notify when a download is cleaned." Type="Variable" Display="always" Required="false" Mask="false">false</Config>
+  <Config Name="APPRISE__ON_CATEGORY_CHANGED" Target="APPRISE__ON_CATEGORY_CHANGED" Default="false|true" Mode="" Description="Notify when a download's category is changed." Type="Variable" Display="always" Required="false" Mask="false">false</Config>
 
   <Config Name="HTTP_MAX_RETRIES" Target="HTTP_MAX_RETRIES" Default="0" Mode="" Description="The number of times to retry a failed HTTP call (to *arrs, download clients etc.)" Type="Variable" Display="advanced" Required="false" Mask="false">0</Config>
   <Config Name="HTTP_TIMEOUT" Target="HTTP_TIMEOUT" Default="100" Mode="" Description="The number of seconds to wait before failing an HTTP call (to *arrs, download clients etc.)" Type="Variable" Display="advanced" Required="false" Mask="false">100</Config>
